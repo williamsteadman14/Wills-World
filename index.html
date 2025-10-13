@@ -5,62 +5,166 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Will's World</title>
   <style>
-    /* ... [keep all your existing styles up to .blog-post p] ... */
-    .see-more-btn {
-      display: inline-block;
-      background-color: #706fd3;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 0.4em 1em;
-      margin-top: 0.7em;
-      cursor: pointer;
-      font-size: 0.98em;
-      transition: background 0.2s;
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #2c2c54);
+      color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth; /* Smooth scrolling */
     }
-    .see-more-btn:hover {
+
+    header {
+      text-align: center;
+      padding: 2rem;
       background-color: #3b3b98;
+      font-size: 2.5rem;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
-    .blog-post .full-content {
-      display: none;
-      margin-top: 0.5em;
+
+    nav {
+      text-align: center;
+      margin: 1rem 0;
+      position: sticky;
+      top: 0;
+      background-color: #3b3b98;
+      padding: 0.5rem 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: #f0f0f0;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #706fd3;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    section {
+      background-color: #40407a;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    section h2 {
+      border-bottom: 2px solid #706fd3;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Video grid */
+    #videos-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    #videos-gallery iframe {
+      width: 100%;
+      height: 200px;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+
+    #videos-gallery iframe:hover {
+      transform: scale(1.05);
+    }
+
+    /* Art grid */
+    #art-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    #art-gallery img {
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    #art-gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    #art-gallery p {
+      text-align: center;
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      color: #f0f0f0;
+    }
+
+    /* Blog styling */
+    #blog-posts {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .blog-post {
+      background-color: #474787;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    .blog-post h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      color: #f0f0f0;
+    }
+    .blog-post p {
+      margin: 0;
       color: #e0e0e0;
       white-space: pre-line;
     }
-    .blog-post.expanded .full-content {
-      display: block;
-      animation: fadeIn 0.3s;
-    }
-    .blog-post.expanded .truncated-content {
-      display: none;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #2c2c54;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
   <header>Welcome to Will's World</header>
+
   <nav>
     <a href="#videos">Videos</a>
     <a href="#art">Art</a>
     <a href="#blog">Blog</a>
   </nav>
+
   <main>
     <section id="videos">
       <h2>🎥 My Videos</h2>
       <div id="videos-gallery"></div>
     </section>
+
     <section id="art">
       <h2>🎨 My Art</h2>
       <div id="art-gallery"></div>
     </section>
+
     <section id="blog">
       <h2>📝 Blog</h2>
       <div id="blog-posts"></div>
     </section>
   </main>
+
   <footer>© 2025 Will's World | Built with ❤️</footer>
 
   <script>
@@ -69,7 +173,9 @@
       "wqtSyK4u7PI",
       "cJSi5TMKKjM"
     ];
+
     const videosGallery = document.getElementById("videos-gallery");
+
     videoIDs.forEach(id => {
       const iframe = document.createElement("iframe");
       iframe.src = `https://www.youtube.com/embed/${id}`;
@@ -84,14 +190,19 @@
         description: "Art of my fire genasi fighter that I'm playing in D&D"
       }
     ];
+
     const artGallery = document.getElementById("art-gallery");
+
     artData.forEach(art => {
       const container = document.createElement("div");
+
       const image = document.createElement("img");
       image.src = art.src;
       image.alt = "My Art";
+
       const desc = document.createElement("p");
       desc.textContent = art.description;
+
       container.appendChild(image);
       container.appendChild(desc);
       artGallery.appendChild(container);
@@ -105,79 +216,50 @@
       },
       {
         title: "Two Views, one conversation",
-        content: `The other night, I found myself in a deep and surprisingly long debate with my sister’s husband about religion, science, and belief. What started as a casual discussion turned into[...]
+        content: `The other night, I found myself in a deep and surprisingly long debate with my sister’s husband about religion, science, and belief. What started as a casual discussion turned into a full-on exchange of ideas, questions, and perspectives. one that challenged all of us to think about what we believe and why.
 
-It began when I mentioned that I believe in science and see it as the foundation for understanding how the world works. Her husband immediately asked if I believed in evolution, and when I said yes, h[...]
+It began when I mentioned that I believe in science and see it as the foundation for understanding how the world works. Her husband immediately asked if I believed in evolution, and when I said yes, he questioned how that could make sense when humans don’t act or look like monkeys. I explained that evolution doesn’t say we came from monkeys, it says we share a common ancestor with them, meaning we evolved along different paths millions of years ago.
 
-From there, the conversation shifted toward the age of the Earth. He said the Earth isn’t even a million years old and that people can’t truly “put an age” on it. I explained that through meth[...]
+From there, the conversation shifted toward the age of the Earth. He said the Earth isn’t even a million years old and that people can’t truly “put an age” on it. I explained that through methods like radiometric dating and studying rock layers, scientists have consistently estimated the Earth’s age at around 4.5 billion years. He brought up Noah’s Ark, claiming it had been discovered and that the great flood described in the Bible was evidence of divine truth. I responded that large floods likely did happen historically, but that global flood stories appear in many cultures, which could point to a shared human experience rather than a single biblical event.
 
-He also mentioned the Virgin Mary and how her story couldn’t make sense if I believed only in science. I clarified that I see such stories as symbolic or historical myths that hold meaning, even if [...]
+He also mentioned the Virgin Mary and how her story couldn’t make sense if I believed only in science. I clarified that I see such stories as symbolic or historical myths that hold meaning, even if they aren’t literal events. To me, religion can still have deep value, it just doesn’t have to be taken word-for-word to have significance.
 
-Then came a question that really sparked a deeper part of the debate: “So you believe humans created God just to feel better about dying?” I said yes, in a way, across time, people have created go[...]
+Then came a question that really sparked a deeper part of the debate: “So you believe humans created God just to feel better about dying?” I said yes, in a way, across time, people have created gods to explain the unexplainable and to give life meaning beyond death. Belief gives comfort, and that’s not a bad thing.
 
-He replied that most atheists used to be devoted Christians, and asked why those people didn’t just turn to another religion instead of becoming atheists. I said that when people stop believing in G[...]
+He replied that most atheists used to be devoted Christians, and asked why those people didn’t just turn to another religion instead of becoming atheists. I said that when people stop believing in God, it’s often because they can’t reconcile faith with evidence anymore. Not because they want to worship something else. Atheism isn’t another religion; it’s just the absence of belief in any god.
 
-He argued that atheists might actually be “worshiping Satan” because they “believe in themselves” and reject God’s authority. I explained that atheists don’t worship anything. Not Satan, n[...]
+He argued that atheists might actually be “worshiping Satan” because they “believe in themselves” and reject God’s authority. I explained that atheists don’t worship anything. Not Satan, not science, not even themselves. Science isn’t a religion; it’s simply a process for discovering how things work.
 
-Next, he challenged science itself, saying, “Science is flawed  so why base your beliefs on something that’s always changing?” I told him that’s exactly why I trust science: because it does ch[...]
+Next, he challenged science itself, saying, “Science is flawed  so why base your beliefs on something that’s always changing?” I told him that’s exactly why I trust science: because it does change. It admits mistakes, corrects itself, and improves as new evidence comes in. Religion, on the other hand, often refuses to change even when new information appears.
 
-He then said the Bible hasn’t changed from its original Hebrew form, while science constantly shifts its conclusions. I pointed out that the Bible HAS changed over centuries; it's been translated, e[...]
+He then said the Bible hasn’t changed from its original Hebrew form, while science constantly shifts its conclusions. I pointed out that the Bible HAS changed over centuries; it's been translated, edited, and reinterpreted in countless ways. Science changing isn’t a weakness; it’s proof that it’s alive and self-correcting.
 
-Things got more personal after that. He said his father, one of the smartest men he knows, can point out flaws in evolution, astronomy, and other “scientific theories.” He mentioned that humans ha[...]
+Things got more personal after that. He said his father, one of the smartest men he knows, can point out flaws in evolution, astronomy, and other “scientific theories.” He mentioned that humans have a gene shaped like a cross that can regenerate after three days. Something he felt proved God’s design. I said that while the cross-shaped “laminin” protein is interesting, its shape doesn’t hold religious meaning by itself. People often see symbols where they want to find them.
 
-Finally, he asked, “If we’re one nation under God, why not one nation under science?” I said that the phrase “under God” was added during the Cold War, when the U.S. wanted to distinguish it[...]
+Finally, he asked, “If we’re one nation under God, why not one nation under science?” I said that the phrase “under God” was added during the Cold War, when the U.S. wanted to distinguish itself from atheistic communism. Science doesn’t require worship or devotion. It's a tool, not a belief system.
 
-That led us into the question of church and state. He argued that there was never supposed to be a separation between them, pointing to older textbooks and England’s history as examples. I explained[...]
+That led us into the question of church and state. He argued that there was never supposed to be a separation between them, pointing to older textbooks and England’s history as examples. I explained that the separation exists to protect freedom of belief. To make sure the government can’t favor one religion over another. People can still believe, pray, and worship, but those beliefs shouldn’t decide national law.
 
-After that, things started to get tense. He grew frustrated, and I could tell emotions were running high. So I decided to end the debate respectfully, making it clear that I meant no disrespect to him[...]
+After that, things started to get tense. He grew frustrated, and I could tell emotions were running high. So I decided to end the debate respectfully, making it clear that I meant no disrespect to him. I told him I appreciated the discussion and that even though we don’t see eye-to-eye, I value being able to talk about it openly.
 
-That night reminded me how deeply personal belief is. Faith and science both try to answer the same question: why are we here? But they go about it in very different ways. I don’t expect anyone to c[...]
+That night reminded me how deeply personal belief is. Faith and science both try to answer the same question: why are we here? But they go about it in very different ways. I don’t expect anyone to change their mind, but I believe conversations like that matter. Respectful dialogue is how we grow, even when we disagree.`
       }
       // Add more blog post objects here if you'd like
     ];
 
-    // BLOG RENDER LOGIC (robust and isolated for blog only)
     const blogPostsContainer = document.getElementById("blog-posts");
-    blogPosts.forEach((post, idx) => {
+    blogPosts.forEach(post => {
       const postDiv = document.createElement("div");
       postDiv.className = "blog-post";
 
       const postTitle = document.createElement("h3");
       postTitle.textContent = post.title;
+
+      const postContent = document.createElement("p");
+      postContent.textContent = post.content;
+
       postDiv.appendChild(postTitle);
-
-      const content = post.content;
-      if (content.length > 200) {
-        const truncatedContent = document.createElement("p");
-        truncatedContent.className = "truncated-content";
-        truncatedContent.textContent = content.slice(0, 200) + "...";
-
-        const fullContent = document.createElement("p");
-        fullContent.className = "full-content";
-        fullContent.textContent = content;
-
-        const seeMoreBtn = document.createElement("button");
-        seeMoreBtn.className = "see-more-btn";
-        seeMoreBtn.textContent = "See more";
-
-        seeMoreBtn.addEventListener("click", () => {
-          postDiv.classList.toggle("expanded");
-          if (postDiv.classList.contains("expanded")) {
-            seeMoreBtn.textContent = "See less";
-          } else {
-            seeMoreBtn.textContent = "See more";
-          }
-        });
-
-        postDiv.appendChild(truncatedContent);
-        postDiv.appendChild(fullContent);
-        postDiv.appendChild(seeMoreBtn);
-
-      } else {
-        const postContent = document.createElement("p");
-        postContent.textContent = content;
-        postDiv.appendChild(postContent);
-      }
+      postDiv.appendChild(postContent);
 
       blogPostsContainer.appendChild(postDiv);
     });
