@@ -11,7 +11,7 @@
       color: #f0f0f0;
       margin: 0;
       padding: 0;
-      scroll-behavior: smooth; /* Smooth scrolling */
+      scroll-behavior: smooth;
     }
 
     header {
@@ -65,7 +65,6 @@
       margin-bottom: 1rem;
     }
 
-    /* Video grid */
     #videos-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -83,7 +82,6 @@
       transform: scale(1.05);
     }
 
-    /* Art grid */
     #art-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -108,27 +106,46 @@
       color: #f0f0f0;
     }
 
-    /* Blog styling */
     #blog-posts {
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
     }
+
     .blog-post {
       background-color: #474787;
       border-radius: 10px;
       padding: 1rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
+
     .blog-post h3 {
       margin-top: 0;
       margin-bottom: 0.5rem;
       color: #f0f0f0;
     }
+
     .blog-post p {
       margin: 0;
       color: #e0e0e0;
       white-space: pre-line;
+      display: none;
+    }
+
+    .view-btn {
+      background-color: #4a69bd;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .view-btn:hover {
+      background-color: #3c54a0;
+      transform: scale(1.05);
     }
 
     footer {
@@ -168,14 +185,9 @@
   <footer>© 2025 Will's World | Built with ❤️</footer>
 
   <script>
-    // Video IDs from YouTube
-    const videoIDs = [
-      "wqtSyK4u7PI",
-      "cJSi5TMKKjM"
-    ];
-
+    // Videos
+    const videoIDs = ["wqtSyK4u7PI", "cJSi5TMKKjM"];
     const videosGallery = document.getElementById("videos-gallery");
-
     videoIDs.forEach(id => {
       const iframe = document.createElement("iframe");
       iframe.src = `https://www.youtube.com/embed/${id}`;
@@ -183,39 +195,34 @@
       videosGallery.appendChild(iframe);
     });
 
-    // Art images with description
+    // Art
     const artData = [
       {
         src: "Screenshot_20251004-205905.Photos.png",
         description: "Art of my fire genasi fighter that I'm playing in D&D"
       }
     ];
-
     const artGallery = document.getElementById("art-gallery");
-
     artData.forEach(art => {
       const container = document.createElement("div");
-
       const image = document.createElement("img");
       image.src = art.src;
       image.alt = "My Art";
-
       const desc = document.createElement("p");
       desc.textContent = art.description;
-
       container.appendChild(image);
       container.appendChild(desc);
       artGallery.appendChild(container);
     });
 
-    // Blog posts data -- you can add more posts here
+    // Blog posts
     const blogPosts = [
       {
         title: "Welcome to My Blog!",
-        content: "This is my first post on Will's World! Stay tuned for updates, thoughts, and stories."
+        content: `This is my first post on Will's World! Stay tuned for updates, thoughts, and stories.`
       },
       {
-        title: "Two Views, one conversation",
+        title: "Two Views, One Conversation",
         content: `The other night, I found myself in a deep and surprisingly long debate with my sister’s husband about religion, science, and belief. What started as a casual discussion turned into a full-on exchange of ideas, questions, and perspectives. one that challenged all of us to think about what we believe and why.
 
 It began when I mentioned that I believe in science and see it as the foundation for understanding how the world works. Her husband immediately asked if I believed in evolution, and when I said yes, he questioned how that could make sense when humans don’t act or look like monkeys. I explained that evolution doesn’t say we came from monkeys, it says we share a common ancestor with them, meaning we evolved along different paths millions of years ago.
@@ -230,7 +237,7 @@ He replied that most atheists used to be devoted Christians, and asked why those
 
 He argued that atheists might actually be “worshiping Satan” because they “believe in themselves” and reject God’s authority. I explained that atheists don’t worship anything. Not Satan, not science, not even themselves. Science isn’t a religion; it’s simply a process for discovering how things work.
 
-Next, he challenged science itself, saying, “Science is flawed  so why base your beliefs on something that’s always changing?” I told him that’s exactly why I trust science: because it does change. It admits mistakes, corrects itself, and improves as new evidence comes in. Religion, on the other hand, often refuses to change even when new information appears.
+Next, he challenged science itself, saying, “Science is flawed so why base your beliefs on something that’s always changing?” I told him that’s exactly why I trust science: because it does change. It admits mistakes, corrects itself, and improves as new evidence comes in. Religion, on the other hand, often refuses to change even when new information appears.
 
 He then said the Bible hasn’t changed from its original Hebrew form, while science constantly shifts its conclusions. I pointed out that the Bible HAS changed over centuries; it's been translated, edited, and reinterpreted in countless ways. Science changing isn’t a weakness; it’s proof that it’s alive and self-correcting.
 
@@ -244,7 +251,6 @@ After that, things started to get tense. He grew frustrated, and I could tell em
 
 That night reminded me how deeply personal belief is. Faith and science both try to answer the same question: why are we here? But they go about it in very different ways. I don’t expect anyone to change their mind, but I believe conversations like that matter. Respectful dialogue is how we grow, even when we disagree.`
       }
-      // Add more blog post objects here if you'd like
     ];
 
     const blogPostsContainer = document.getElementById("blog-posts");
@@ -258,7 +264,18 @@ That night reminded me how deeply personal belief is. Faith and science both try
       const postContent = document.createElement("p");
       postContent.textContent = post.content;
 
+      const viewButton = document.createElement("button");
+      viewButton.className = "view-btn";
+      viewButton.textContent = "View";
+
+      viewButton.addEventListener("click", () => {
+        const isHidden = postContent.style.display === "none";
+        postContent.style.display = isHidden ? "block" : "none";
+        viewButton.textContent = isHidden ? "Hide" : "View";
+      });
+
       postDiv.appendChild(postTitle);
+      postDiv.appendChild(viewButton);
       postDiv.appendChild(postContent);
 
       blogPostsContainer.appendChild(postDiv);
