@@ -108,6 +108,28 @@
       color: #f0f0f0;
     }
 
+    /* Blog styling */
+    #blog-posts {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .blog-post {
+      background-color: #474787;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    .blog-post h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      color: #f0f0f0;
+    }
+    .blog-post p {
+      margin: 0;
+      color: #e0e0e0;
+    }
+
     footer {
       text-align: center;
       padding: 1rem;
@@ -122,6 +144,7 @@
   <nav>
     <a href="#videos">Videos</a>
     <a href="#art">Art</a>
+    <a href="#blog">Blog</a>
   </nav>
 
   <main>
@@ -133,6 +156,11 @@
     <section id="art">
       <h2>🎨 My Art</h2>
       <div id="art-gallery"></div>
+    </section>
+
+    <section id="blog">
+      <h2>📝 Blog</h2>
+      <div id="blog-posts"></div>
     </section>
   </main>
 
@@ -177,6 +205,32 @@
       container.appendChild(image);
       container.appendChild(desc);
       artGallery.appendChild(container);
+    });
+
+    // Blog posts data -- you can add more posts here
+    const blogPosts = [
+      {
+        title: "Welcome to My Blog!",
+        content: "This is my first post on Will's World! Stay tuned for updates, thoughts, and stories."
+      }
+      // Add more blog post objects here if you'd like
+    ];
+
+    const blogPostsContainer = document.getElementById("blog-posts");
+    blogPosts.forEach(post => {
+      const postDiv = document.createElement("div");
+      postDiv.className = "blog-post";
+
+      const postTitle = document.createElement("h3");
+      postTitle.textContent = post.title;
+
+      const postContent = document.createElement("p");
+      postContent.textContent = post.content;
+
+      postDiv.appendChild(postTitle);
+      postDiv.appendChild(postContent);
+
+      blogPostsContainer.appendChild(postDiv);
     });
   </script>
 </body>
