@@ -5,131 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Will's World</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #1e1e2f, #2c2c54);
-      color: #f0f0f0;
-      margin: 0;
-      padding: 0;
-      scroll-behavior: smooth; /* Smooth scrolling */
-    }
-
-    header {
-      text-align: center;
-      padding: 2rem;
-      background-color: #3b3b98;
-      font-size: 2.5rem;
-      font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
-
-    nav {
-      text-align: center;
-      margin: 1rem 0;
-      position: sticky;
-      top: 0;
-      background-color: #3b3b98;
-      padding: 0.5rem 0;
-      z-index: 10;
-    }
-
-    nav a {
-      color: #f0f0f0;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #706fd3;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 1rem;
-    }
-
-    section {
-      background-color: #40407a;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-      padding: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
-
-    section h2 {
-      border-bottom: 2px solid #706fd3;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    /* Video grid */
-    #videos-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1rem;
-    }
-
-    #videos-gallery iframe {
-      width: 100%;
-      height: 200px;
-      border-radius: 8px;
-      transition: transform 0.3s;
-    }
-
-    #videos-gallery iframe:hover {
-      transform: scale(1.05);
-    }
-
-    /* Art grid */
-    #art-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-
-    #art-gallery img {
-      width: 100%;
-      border-radius: 8px;
-      object-fit: cover;
-      transition: transform 0.3s;
-    }
-
-    #art-gallery img:hover {
-      transform: scale(1.05);
-    }
-
-    #art-gallery p {
-      text-align: center;
-      margin-top: 0.5rem;
-      font-size: 0.95rem;
-      color: #f0f0f0;
-    }
-
-    /* Blog styling */
-    #blog-posts {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    .blog-post {
-      background-color: #474787;
-      border-radius: 10px;
-      padding: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
-    .blog-post h3 {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-      color: #f0f0f0;
-    }
-    .blog-post p {
-      margin: 0;
-      color: #e0e0e0;
-      white-space: pre-line;
-    }
+    /* ... [keep all your existing styles up to .blog-post p] ... */
     .see-more-btn {
       display: inline-block;
       background-color: #706fd3;
@@ -162,41 +38,29 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #2c2c54;
-      font-size: 0.9rem;
-    }
   </style>
 </head>
 <body>
   <header>Welcome to Will's World</header>
-
   <nav>
     <a href="#videos">Videos</a>
     <a href="#art">Art</a>
     <a href="#blog">Blog</a>
   </nav>
-
   <main>
     <section id="videos">
       <h2>🎥 My Videos</h2>
       <div id="videos-gallery"></div>
     </section>
-
     <section id="art">
       <h2>🎨 My Art</h2>
       <div id="art-gallery"></div>
     </section>
-
     <section id="blog">
       <h2>📝 Blog</h2>
       <div id="blog-posts"></div>
     </section>
   </main>
-
   <footer>© 2025 Will's World | Built with ❤️</footer>
 
   <script>
@@ -205,9 +69,7 @@
       "wqtSyK4u7PI",
       "cJSi5TMKKjM"
     ];
-
     const videosGallery = document.getElementById("videos-gallery");
-
     videoIDs.forEach(id => {
       const iframe = document.createElement("iframe");
       iframe.src = `https://www.youtube.com/embed/${id}`;
@@ -222,19 +84,14 @@
         description: "Art of my fire genasi fighter that I'm playing in D&D"
       }
     ];
-
     const artGallery = document.getElementById("art-gallery");
-
     artData.forEach(art => {
       const container = document.createElement("div");
-
       const image = document.createElement("img");
       image.src = art.src;
       image.alt = "My Art";
-
       const desc = document.createElement("p");
       desc.textContent = art.description;
-
       container.appendChild(image);
       container.appendChild(desc);
       artGallery.appendChild(container);
@@ -279,59 +136,46 @@ That night reminded me how deeply personal belief is. Faith and science both try
       // Add more blog post objects here if you'd like
     ];
 
+    // BLOG RENDER LOGIC (robust and isolated for blog only)
     const blogPostsContainer = document.getElementById("blog-posts");
-
     blogPosts.forEach((post, idx) => {
       const postDiv = document.createElement("div");
       postDiv.className = "blog-post";
-      // Unique ID for each post, used for button
-      const postId = `blog-post-${idx}`;
 
       const postTitle = document.createElement("h3");
       postTitle.textContent = post.title;
+      postDiv.appendChild(postTitle);
 
-      // Determine if truncation is needed
       const content = post.content;
       if (content.length > 200) {
-        const truncated = content.slice(0, 200) + "...";
-
-        // Truncated content
         const truncatedContent = document.createElement("p");
         truncatedContent.className = "truncated-content";
-        truncatedContent.textContent = truncated;
+        truncatedContent.textContent = content.slice(0, 200) + "...";
 
-        // Full content (hidden initially)
         const fullContent = document.createElement("p");
         fullContent.className = "full-content";
         fullContent.textContent = content;
 
-        // See more button
         const seeMoreBtn = document.createElement("button");
         seeMoreBtn.className = "see-more-btn";
         seeMoreBtn.textContent = "See more";
 
-        seeMoreBtn.addEventListener("click", function() {
-          // Toggle expanded class for animation and reveal
-          const expanded = postDiv.classList.toggle("expanded");
-          if (expanded) {
+        seeMoreBtn.addEventListener("click", () => {
+          postDiv.classList.toggle("expanded");
+          if (postDiv.classList.contains("expanded")) {
             seeMoreBtn.textContent = "See less";
-            // Optionally, scroll if needed:
-            // postDiv.scrollIntoView({behavior: "smooth", block: "nearest"});
           } else {
             seeMoreBtn.textContent = "See more";
           }
         });
 
-        postDiv.appendChild(postTitle);
         postDiv.appendChild(truncatedContent);
         postDiv.appendChild(fullContent);
         postDiv.appendChild(seeMoreBtn);
 
       } else {
-        // No truncation needed
         const postContent = document.createElement("p");
         postContent.textContent = content;
-        postDiv.appendChild(postTitle);
         postDiv.appendChild(postContent);
       }
 
